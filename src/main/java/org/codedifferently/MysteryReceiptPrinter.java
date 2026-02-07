@@ -1,7 +1,7 @@
 package org.codedifferently;
 import java.util.*;
 
-class MysteryReceiptGenerator {
+class MysteryReceiptPrinter {
     static String storeName = "Jayden's Emporium";
 
     public static void printReceipt(String name, double budget, String coupon) {
@@ -27,7 +27,7 @@ class MysteryReceiptGenerator {
 
 
         // Prints the receipt to the console
-        System.out.println("\n" +MysteryReceiptGenerator.storeName);
+        System.out.println("\n" + MysteryReceiptPrinter.storeName);
         System.out.println("----------------------------------------------------------------");
         System.out.println("ID Code: " + visitorID);
         System.out.println("Receipt Code: " + receiptCode);

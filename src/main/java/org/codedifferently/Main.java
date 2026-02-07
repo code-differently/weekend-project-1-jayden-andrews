@@ -8,16 +8,16 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter your name: ");
-        String name = sc.nextLine();
+        String name = sc.nextLine().trim();
 
         System.out.print("Enter your budget: ");
         double budget = sc.nextDouble();
         sc.nextLine();
 
         System.out.print("Enter a coupon code: ");
-        String coupon = sc.nextLine();
+        String coupon = sc.nextLine().trim();
 
         sc.close();
-        MysteryReceiptGenerator.printReceipt(name, budget, coupon);
+        MysteryReceiptPrinter.printReceipt(name, budget, coupon);
     }
 }
