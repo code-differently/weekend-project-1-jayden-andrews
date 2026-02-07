@@ -4,7 +4,7 @@ import java.util.*;
 class MysteryReceiptGenerator {
     static String name = "Jayden's Emporium";
 
-    public static double validateCoupon(String coupon) {
+    public static double validateCoupon(String coupon, Random random) {
         System.out.println("\nChecking for coupon code...");
         if ((coupon).equalsIgnoreCase("friend")) {
             System.out.println("Coupon code " + "\"" + coupon + "\" accepted!");
@@ -12,6 +12,17 @@ class MysteryReceiptGenerator {
         } else if ((coupon).equalsIgnoreCase("employee")) {
             System.out.println("Coupon code " + "\"" + coupon + "\" accepted!");
             return 0.30;
+        } else if (coupon.equalsIgnoreCase("chance")) {
+            System.out.println("Coupon code " + "\"" + coupon + "\" accepted!\nWelcome to Chance Time!\nRolling the dice (1-6)...");
+            int diceRoll = (random.nextInt(1, 7));
+            System.out.println("Rolled " + diceRoll + ".");
+            if (diceRoll % 2 == 0) {
+                System.out.println("YOU'VE GOTTEN LUCKY!!!");
+                return 0.40;
+            } else {
+                System.out.println("Better luck next time...");
+                return -0.05;
+            }
         } else {
             System.out.println("Coupon code " + "\"" + coupon + "\" not found!");
             return 0.0;
@@ -31,7 +42,7 @@ class MysteryReceiptGenerator {
     }
 
     public static double generateTax(Random random) {
-        return ((Math.floor(random.nextDouble(2, 7))) / 100);
+        return ((double) (Math.round(random.nextDouble(1.5, 7.5))) / 100);
     }
 
     public static double calculateSubtotal(double price1, double price2, double price3) {
@@ -77,7 +88,7 @@ class MysteryReceiptGenerator {
         System.out.printf("Subtotal: $%.2f%n", subtotal);
         System.out.println("\n---Price Adjustments---");
         System.out.println("Sales tax: " + ((int)(tax * 100)) + "%");
-        double discount = MysteryReceiptGenerator.validateCoupon(coupon);
+        double discount = MysteryReceiptGenerator.validateCoupon(coupon, random);
         double finalTotal = MysteryReceiptGenerator.calculateFinalTotal(subtotal, tax, discount);
         if (discount != 0.0) {
             System.out.println("Discount: " + (int)(discount * 100) + "%");
@@ -87,9 +98,7 @@ class MysteryReceiptGenerator {
         if (finalTotal > budget) {
             System.out.printf("\nTransaction failed!\nInsufficient Funds. User is short by $%.2f dollars...\nCancelling transaction.", Math.abs(budget - finalTotal));
         } else {
-
             System.out.println("\nTransaction succeeded!\nThank you for shopping at Jayden's Emporium!");
         }
-
     }
 }
