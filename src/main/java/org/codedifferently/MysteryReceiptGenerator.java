@@ -2,10 +2,19 @@ package org.codedifferently;
 import java.util.*;
 
 class MysteryReceiptGenerator {
-    String name = "Jayden's Emporium";
+    static String name = "Jayden's Emporium";
 
-    public String validateCoupon(String coupon) {
-        return "";
+    public static double validateCoupon(String coupon) {
+        if ((coupon).equalsIgnoreCase("friend")) {
+            System.out.println("-Coupon code " + "\"" + coupon + "\" accepted-");
+            return 0.15;
+        } else if ((coupon).equalsIgnoreCase("employee")) {
+            System.out.println("-Coupon code " + "\"" + coupon + "\" accepted-");
+            return 0.30;
+        } else {
+            System.out.println("-Coupon code not found.-");
+            return 0.0;
+        }
     }
 
     public static String generateReceiptCode(String name, int visitorID) {
@@ -21,14 +30,14 @@ class MysteryReceiptGenerator {
     }
 
     public static double generateTax(Random random) {
-        return ((double) random.nextInt(2, 8) / 100);
+        return (Math.round(random.nextDouble(0.01, 0.07)));
     }
 
-    public double calculateTotal() {
-        return 0.0;
+    public static double calculateSubtotal(double price1, double price2, double price3) {
+        return price1 + price2 + price3;
     }
 
-    public static void printReceipt(String name, double amount, String coupon) {
+    public static void printReceipt(String name, double budget, String coupon) {
         /*
         Store name
         Visitor ID
@@ -42,6 +51,25 @@ class MysteryReceiptGenerator {
         Random random = new Random();
         int visitorID = MysteryReceiptGenerator.generateVisitorID(random);
         String receiptCode = MysteryReceiptGenerator.generateReceiptCode(name, visitorID);
-        System.out.println(receiptCode);
+        double price1 = MysteryReceiptGenerator.generatePrice(random);
+        double price2 = MysteryReceiptGenerator.generatePrice(random);
+        double price3 = MysteryReceiptGenerator.generatePrice(random);
+        double tax = MysteryReceiptGenerator.generateTax(random);
+        double subtotal = MysteryReceiptGenerator.calculateSubtotal(price1, price2, price3);
+        double discount = MysteryReceiptGenerator.validateCoupon(coupon);
+
+        // Prints the receipt to the console
+        System.out.println("\n" +MysteryReceiptGenerator.name);
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("ID Code: " + visitorID);
+        System.out.println("Receipt Code: " + receiptCode);
+        System.out.println("Item 1: $" + price1);
+        System.out.println("Item 2: $" + price2);
+        System.out.println("Item 3: $" + price3);
+        System.out.println("Subtotal: $" + subtotal);
+        System.out.println("\n-Price Adjustments-");
+        System.out.println("Sales tax: " + (tax * 100) + "%");
+
+
     }
 }
