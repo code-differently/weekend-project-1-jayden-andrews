@@ -7,13 +7,17 @@ public class Main {
     static void main() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter a name: ");
+        System.out.print("Enter your name: ");
         String name = sc.nextLine();
 
         System.out.print("Enter your budget: ");
         double budget = sc.nextDouble();
+        sc.nextLine();
 
         System.out.print("Enter a coupon code: ");
         String coupon = sc.nextLine();
+
+        sc.close();
+        MysteryReceiptGenerator.printReceipt(name, budget, coupon);
     }
 }
