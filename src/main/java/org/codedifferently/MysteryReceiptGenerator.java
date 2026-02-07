@@ -29,21 +29,6 @@ class MysteryReceiptGenerator {
         }
     }
 
-    public static String generateReceiptCode(String name, int visitorID) {
-        return (name.substring(0, 3)).toUpperCase() + "-" + visitorID;
-    }
-
-    public static int generateVisitorID(Random random) {
-        return random.nextInt(1000, 1000000);
-    }
-
-    public static double generatePrice(Random random) {
-        return ((double) random.nextInt(1000, 20000) / 100);
-    }
-
-    public static double generateTax(Random random) {
-        return ((double) (Math.round(random.nextDouble(1.5, 7.5))) / 100);
-    }
 
     public static void printReceipt(String name, double budget, String coupon) {
         /*
@@ -57,13 +42,13 @@ class MysteryReceiptGenerator {
         Final Total
          */
         Random random = new Random();
-        int visitorID = MysteryReceiptGenerator.generateVisitorID(random);
-        String receiptCode = MysteryReceiptGenerator.generateReceiptCode(name, visitorID);
-        double price1 = MysteryReceiptGenerator.generatePrice(random);
-        double price2 = MysteryReceiptGenerator.generatePrice(random);
-        double price3 = MysteryReceiptGenerator.generatePrice(random);
-        double tax = MysteryReceiptGenerator.generateTax(random);
-        double subtotal = Calculator.calculateSubtotal(price1, price2, price3);
+        int visitorID = RandomDataGenerator.generateVisitorID(random);
+        String receiptCode = RandomDataGenerator.generateReceiptCode(name, visitorID);
+        double price1 = RandomDataGenerator.generatePrice(random);
+        double price2 = RandomDataGenerator.generatePrice(random);
+        double price3 = RandomDataGenerator.generatePrice(random);
+        double tax = RandomDataGenerator.generateTax(random);
+        double subtotal = ReceiptCalculator.calculateSubtotal(price1, price2, price3);
 
 
 
@@ -79,7 +64,7 @@ class MysteryReceiptGenerator {
         System.out.println("\n---Price Adjustments---");
         System.out.println("Sales tax: " + ((int)(tax * 100)) + "%");
         double discount = MysteryReceiptGenerator.validateCoupon(coupon, random);
-        double finalTotal = Calculator.calculateFinalTotal(subtotal, tax, discount);
+        double finalTotal = ReceiptCalculator.calculateFinalTotal(subtotal, tax, discount);
         if (discount != 0.0) {
             System.out.println("Discount: " + (int)(discount * 100) + "%");
         }

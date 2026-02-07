@@ -1,6 +1,6 @@
 package org.codedifferently;
 
-public class Calculator {
+public class ReceiptCalculator {
     public static double calculateSubtotal(double price1, double price2, double price3) {
         return price1 + price2 + price3;
     }
